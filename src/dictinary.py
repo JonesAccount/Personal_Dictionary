@@ -1,17 +1,12 @@
 from random import choice
 
-test_words = ["Word", "Pyton", "Programmer", "Key", "Car", "Cat", "Cake", "Some", "Fire",
-              "Game", "Water", "Food", "Planet", "None", "Java", "Globus", "Bus", "Person",
-              "Student", "Console", "Player", "Giant", "Small", "Country", "AI", "Robot",
-              "Top", "Company", "Beach", "Run", "Close", "Dog", "Girl", "Boy", "Daddy", "Mom"]
-
 dictionary = []
 
 
 def show_all_words():
     if len(dictionary) != 0:
         print("-" * 35)
-        print("📒 Ваш словарь")
+        print("📒 Ваш словарь:")
         for count in range(len(dictionary)):
             print(f"{count + 1}. {dictionary[count]}")
     else:
@@ -20,18 +15,18 @@ def show_all_words():
 
 def show_one_word():
     if len(dictionary) != 0:
+        choice_word = input("[📖] Укажите индекс или слово: ")
+        choice_word.lower()
         try:
-            choice_word = input("[📖] Укажите индекс или само слово: ")
             if type(int(choice_word)) == type(1):
+                choice_word = int(choice_word)
                 if dictionary[choice_word - 1] in dictionary:
-                    print(f"{dictionary[choice_word - 1]}")
-            else:
-                if choice_word in dictionary:
-                    print(f"{dictionary[dictionary.index(choice_word)]}")
-                else:
-                    print("Такое слово в словаре нет")
+                    print(f"[✅] Ваше слово: {dictionary[choice_word - 1]}")
         except ValueError:
-            print()
+            if choice_word in dictionary:
+                print(f"[✅] Ваше слово: {choice_word}")
+            else:
+                print("[🚫] Такое слово в словаре нет")
     else:
         print("[😟] Ваш словарь пуст")
 
@@ -57,20 +52,33 @@ def add_word():
 
 
 def delete_word():
-    pass
+    if len(dictionary) != 0:
+        choice_word = input("[📖] Укажите индекс или слово: ")
+        choice_word.lower()
+        try:
+            if type(int(choice_word)) == type(1):
+                choice_word = int(choice_word)
+                if dictionary[choice_word - 1] in dictionary:
+                    print(f"[🗑️] Слово удалено: {dictionary[choice_word - 1]}")
+                    dictionary.remove(dictionary[choice_word - 1])
+        except ValueError:
+            if choice_word in dictionary:
+                print(f"[🗑️] Слово удалено: {choice_word}")
+                dictionary.remove(choice_word)
+            else:
+                print("[🚫] Такое слово в словаре нет")
+    else:
+        print("[😟] Удалить нечего")
 
 
-def generate_random_words():
-    for i in range(5 * 2):
-        random_word = (choice(test_words))
-        dictionary.append(random_word)
-        test_words.remove(random_word)
-
-    print("-" * 35)
-    print("[✅] Случайные слова добавлены")
-    for count in range(len(dictionary)):
-        print(f"{count + 1}. {dictionary[count]}")
+def generate_random_word():
+    file = open("words.txt", "r", encoding="UTF-8")
+    words = [line.strip() for line in file]
+    new_word = choice(words)
+    dictionary.append(new_word)
+    file.close()
+    print(f"[✅] Случайное слово добавлено: {new_word}")
 
 
 def exit_program():
-    pass
+    print("[❤️] Мне будет очень приятно если поставишь звезду ⭐️ на этот мини-проект. Пока)")

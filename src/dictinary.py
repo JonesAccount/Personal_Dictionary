@@ -4,14 +4,21 @@ dictionary = []
 description_word = {}
 
 
+
 def show_all_words():
     if len(dictionary) != 0:
         print("-" * 35)
         print("📒 Ваш словарь:")
         for count in range(len(dictionary)):
-            print(f"{count + 1}. {dictionary[count]}")
+            if count + 1 in description_word.keys():
+                print(f"{count + 1}. {dictionary[count]} +")
+            else:
+                print(f"{count + 1}. {dictionary[count]}")
+        if len(description_word) != 0:
+            print("\n'+' означает что у слова есть описание")
     else:
         print("[😟] Ваш словарь пуст")
+
 
 
 def show_one_word():
@@ -22,14 +29,22 @@ def show_one_word():
             if type(int(choice_word)) == type(1):
                 choice_word = int(choice_word)
                 if dictionary[choice_word - 1] in dictionary:
-                    print(f"[✅] Ваше слово: {dictionary[choice_word - 1]}")
+                    if choice_word in description_word.keys():
+                        print(f"[✅] Ваше слово: {dictionary[choice_word - 1]} +")
+                    else:
+                        print(f"[✅] Ваше слово: {dictionary[choice_word - 1]}")
         except ValueError:
             if choice_word in dictionary:
-                print(f"[✅] Ваше слово: {choice_word}")
+                word_index = dictionary.index(choice_word) + 1
+                if word_index in description_word.keys():
+                    print(f"[✅] Ваше слово: {choice_word} +")
+                else:
+                    print(f"[✅] Ваше слово: {choice_word}")
             else:
                 print("[🚫] Такое слово в словаре нет")
     else:
         print("[😟] Ваш словарь пуст")
+
 
 
 def add_word():
@@ -52,6 +67,7 @@ def add_word():
             print("[❌] Цифры использовать нельзя")
 
 
+
 def delete_word():
     if len(dictionary) != 0:
         choice_word = input("[📖] Укажите индекс или слово: ")
@@ -72,12 +88,14 @@ def delete_word():
         print("[😟] Удалить нечего")
 
 
+
 def clear_dictionary():
     if len(dictionary) != 0:
         dictionary.clear()
         print(f"[✅] Словарь полностью очищен")
     else:
         print("[😟] Удалять нечего")
+
 
 
 def generate_random_word():
@@ -89,6 +107,7 @@ def generate_random_word():
     print(f"[✅] Случайное слово добавлено: {new_word}")
 
 
+
 def add_description():
     if len(dictionary) != 0:
         choice_word = input("[📖] Куда добавим описание: ")
@@ -98,7 +117,7 @@ def add_description():
                 choice_word = int(choice_word)
                 if dictionary[choice_word - 1] in dictionary:
                     value_word = input("[📝] Описание к слову: ")
-                    description_word[choice_word - 1] = value_word
+                    description_word[choice_word] = value_word
         except ValueError:
             if choice_word in dictionary:
                 value_word = input("[📝] Описание к слову: ")
@@ -107,6 +126,7 @@ def add_description():
                 print("[🚫] Такое слово в словаре нет")
     else:
         print("[😟] Словарь пуст")
+
 
 
 def show_description():
@@ -114,19 +134,29 @@ def show_description():
         choice_word = input("[🗂️] Значение какого слово: ")
         choice_word.lower()
         try:
-            if type(int(choice_word)) == type(1):
-                choice_word = int(choice_word)
-                if dictionary[choice_word - 1] in dictionary:
-                    if str(choice_word - 1) in description_word.keys():
-                        print(f"[📁] Описание: {description_word[choice_word - 1]}")
-        except ValueError:
+            choice_word = int(choice_word)
+            if type(choice_word) == type(1):
+                if choice_word in description_word.keys():
+                    print(f"[📁] Описание: {description_word[choice_word]}")
+                elif choice_word not in description_word.keys():
+                    try:
+                        if dictionary[choice_word - 1] in dictionary:
+                            print("[☹️] Описание к этому слову нет")
+                    except IndexError:
+                        print("[❌] Не существующий индекс")
+        except ValueError or TypeError:
+            choice_word = choice_word.lower()
+            word_index = dictionary.index(int(choice_word) + 1)
             if choice_word in dictionary:
-                value_word = input("[📝] Описание к слову: ")
-                description_word[choice_word] = value_word
+                if word_index in description_word.keys():
+                    print(f"[📁] Описание: {description_word[word_index]}")
+                else:
+                    print("[☹️] Описание к этому слову нет")
             else:
                 print("[🚫] Такое слово в словаре нет")
     else:
         print("[😟] Словарь пуст")
+
 
 
 

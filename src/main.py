@@ -1,4 +1,7 @@
-from src.dictinary import show_all_words, show_one_word, add_word, delete_word, generate_random_word, exit_program
+from dictinary import (
+    show_all_words, show_one_word, add_word, delete_word, clear_dictionary,
+    generate_random_word, add_description, show_description, exit_program
+)
 
 
 class Start:
@@ -6,7 +9,7 @@ class Start:
 
 
     def menu(self):
-        print("-" * 35); print("[1] Показать все слова"); print("[2] Показать слово"); print("[3] Добавить слово"); print("[4] Удалить слово"); print("[5] Добавить случайное слово"); print("[6] Выйти"); print("-" * 35)
+        print("-" * 35); print("[1] Показать все слова"); print("[2] Показать слово"); print("[3] Добавить слово"); print("[4] Удалить слово"); print("[5] Удалить все слова"); print("[6] Добавить случайное слово"); print("[7] Добавить значение к слову"); print("[8] Посмотреть значение"); print("[9] Выйти"); print("-" * 35)
         self.commands()
 
 
@@ -26,9 +29,18 @@ class Start:
                 elif self._command_user == 4:
                     delete_word()
                 elif self._command_user == 5:
-                    generate_random_word()
+                    clear_dictionary()
                     start.menu()
                 elif self._command_user == 6:
+                    generate_random_word()
+                    start.menu()
+                elif self._command_user == 7:
+                    add_description()
+                    start.menu()
+                elif self._command_user == 8:
+                    show_description()
+                    start.menu()
+                elif self._command_user == 9:
                     exit_program()
                     break
 

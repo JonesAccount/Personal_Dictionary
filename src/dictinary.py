@@ -1,6 +1,7 @@
 from random import choice
 
 dictionary = []
+description_word = {}
 
 
 def show_all_words():
@@ -71,6 +72,14 @@ def delete_word():
         print("[😟] Удалить нечего")
 
 
+def clear_dictionary():
+    if len(dictionary) != 0:
+        dictionary.clear()
+        print(f"[✅] Словарь полностью очищен")
+    else:
+        print("[😟] Удалять нечего")
+
+
 def generate_random_word():
     file = open("words.txt", "r", encoding="UTF-8")
     words = [line.strip() for line in file]
@@ -78,6 +87,47 @@ def generate_random_word():
     dictionary.append(new_word)
     file.close()
     print(f"[✅] Случайное слово добавлено: {new_word}")
+
+
+def add_description():
+    if len(dictionary) != 0:
+        choice_word = input("[📖] Куда добавим описание: ")
+        choice_word.lower()
+        try:
+            if type(int(choice_word)) == type(1):
+                choice_word = int(choice_word)
+                if dictionary[choice_word - 1] in dictionary:
+                    value_word = input("[📝] Описание к слову: ")
+                    description_word[choice_word - 1] = value_word
+        except ValueError:
+            if choice_word in dictionary:
+                value_word = input("[📝] Описание к слову: ")
+                description_word[choice_word] = value_word
+            else:
+                print("[🚫] Такое слово в словаре нет")
+    else:
+        print("[😟] Словарь пуст")
+
+
+def show_description():
+    if len(dictionary) != 0:
+        choice_word = input("[🗂️] Значение какого слово: ")
+        choice_word.lower()
+        try:
+            if type(int(choice_word)) == type(1):
+                choice_word = int(choice_word)
+                if dictionary[choice_word - 1] in dictionary:
+                    if str(choice_word - 1) in description_word.keys():
+                        print(f"[📁] Описание: {description_word[choice_word - 1]}")
+        except ValueError:
+            if choice_word in dictionary:
+                value_word = input("[📝] Описание к слову: ")
+                description_word[choice_word] = value_word
+            else:
+                print("[🚫] Такое слово в словаре нет")
+    else:
+        print("[😟] Словарь пуст")
+
 
 
 def exit_program():

@@ -17,7 +17,7 @@ def show_all_words():
         if len(description_word) != 0:
             print("\n'+' означает что у слова есть описание")
     else:
-        print("[😟] Ваш словарь пуст")
+        print("r[😟] Ваш словарь пуст")
 
 
 
@@ -61,7 +61,7 @@ def add_word():
                 print(end="")
         if check_word == True:
             dictionary.append(new_word)
-            print(f"[✅] Новое слово добавлено: {new_word}")
+            print("[✅] Новое слово добавлено: {new_word}".format(new_word=new_word))
             break
         else:
             print("[❌] Цифры использовать нельзя")
@@ -80,7 +80,7 @@ def delete_word():
                     dictionary.remove(dictionary[choice_word - 1])
         except ValueError:
             if choice_word in dictionary:
-                print(f"[🗑️] Слово удалено: {choice_word}")
+                print("[🗑️] Слово удалено: {0}".format(choice_word))
                 dictionary.remove(choice_word)
             else:
                 print("[🚫] Такое слово в словаре нет")
@@ -104,7 +104,7 @@ def generate_random_word():
     new_word = choice(words)
     dictionary.append(new_word)
     file.close()
-    print(f"[✅] Случайное слово добавлено: {new_word}")
+    print("[✅] Случайное слово добавлено: {var}".format(var=new_word))
 
 
 

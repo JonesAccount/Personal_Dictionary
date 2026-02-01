@@ -41,6 +41,7 @@ class Start:
                 elif self._command_user == 3:
                     generate_random_word()
                     start.menu()
+
                 elif self._command_user == 4:
                     add_word()
                 elif self._command_user == 5:

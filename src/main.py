@@ -1,9 +1,5 @@
-from dictinary import (
-    show_all_words, show_one_word, add_word, delete_word, clear_dictionary,
-    generate_random_word, add_description, show_description, exit_program
-)
+from dictinary import Functions
 
-# ошибка в команде по просмотру значения
 
 class Start:
     _command_user = None
@@ -33,61 +29,60 @@ class Start:
             try:
                 self._command_user = int(self._command_user)
                 if self._command_user == 1:
-                    show_all_words()
+                    functions.show_all_words()
                     start.menu()
                 elif self._command_user == 2:
-                    show_one_word()
+                    functions.show_one_word()
                     start.menu()
                 elif self._command_user == 3:
-                    generate_random_word()
+                    functions.generate_random_word()
                     start.menu()
-
                 elif self._command_user == 4:
-                    add_word()
+                    functions.add_word()
                 elif self._command_user == 5:
-                    delete_word()
+                    functions.delete_word()
                     start.menu()
                 elif self._command_user == 6:
-                    clear_dictionary()
+                    functions.clear_dictionary()
                     start.menu()
                 elif self._command_user == 7:
-                    add_description()
+                    functions.add_description()
                     start.menu()
                 elif self._command_user == 8:
-                    show_description()
+                    functions.show_description()
                     start.menu()
                 elif self._command_user == 9:
-                    exit_program()
+                    functions.exit_program()
                     break
                 else:
                     command_is_have += 1
 
             except ValueError:
                 if self._command_user.lower() == "показать все слова":
-                    show_all_words()
+                    functions.show_all_words()
                     start.menu()
                 elif self._command_user.lower() == "показать слово":
-                    show_one_word()
+                    functions.show_one_word()
                     start.menu()
                 elif self._command_user.lower() == "добавить слово":
-                    add_word()
+                    functions.add_word()
                     start.menu()
                 elif self._command_user.lower() == "удалить слово":
-                    delete_word()
+                    functions.delete_word()
                 elif self._command_user.lower() == "удалить все слова":
-                    clear_dictionary()
+                    functions.clear_dictionary()
                     start.menu()
                 elif self._command_user.lower() == "добавить случайное слово":
-                    generate_random_word()
+                    functions.generate_random_word()
                     start.menu()
                 elif self._command_user.lower() == "добавить значение к слову":
-                    add_description()
+                    functions.add_description()
                     start.menu()
                 elif self._command_user.lower() == "посмотреть значение":
-                    show_description()
+                    functions.show_description()
                     start.menu()
                 elif self._command_user.lower() == "выйти":
-                    exit_program()
+                    functions.exit_program()
                     break
                 else:
                     command_is_have += 1
@@ -96,6 +91,6 @@ class Start:
                 print("[❌] Такой команды не существует")
 
 
-
+functions = Functions()
 start = Start()
 start.menu()

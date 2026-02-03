@@ -13,7 +13,7 @@ class Functions:
             print("📒 Ваш словарь:")
             for count in range(len(self._dictionary)):
                 if count + 1 in self._description_word.keys():
-                    print(f"{count + 1}. {self._dictionary[count]} +")
+                    print(f"{count + 1}. {self._dictionary[count].ljust(len(self._dictionary[count]) + 1, "+")}")
                 else:
                     print(f"{count + 1}. {self._dictionary[count]}")
             if len(self._description_word) != 0:
@@ -32,7 +32,7 @@ class Functions:
                     choice_word = int(choice_word)
                     if self._dictionary[choice_word - 1] in self._dictionary:
                         if choice_word in self._description_word.keys():
-                            print(f"[✅] Ваше слово: {self._dictionary[choice_word - 1]} +")
+                            print(f"[✅] Ваше слово: {self._dictionary[choice_word - 1].ljust(len(self._dictionary[choice_word - 1]) + 1, "+")}")
                         else:
                             print(f"[✅] Ваше слово: {self._dictionary[choice_word - 1]}")
             except ValueError:
@@ -52,16 +52,7 @@ class Functions:
     def add_word(self):
         while True:
             new_word = input("[✏️] Введите новое слово: ")
-            chars = tuple(new_word)
-            check_word = True
-            for i in chars:
-                try:
-                    if type(int(i)) == type(1):
-                        check_word = False
-                        break
-                except ValueError:
-                    print(end="")
-            if check_word == True:
+            if new_word.isalpha():
                 self._dictionary.append(new_word)
                 print("[✅] Новое слово добавлено: {new_word}".format(new_word=new_word))
                 break

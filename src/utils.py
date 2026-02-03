@@ -7,4 +7,4 @@ class AdditionalFunctions:
         return len(lst) != 0
 
     def check_type(self, object):
-        return type(int(object)) == type(1)
+        return True if object.isdigit() else False
